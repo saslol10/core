@@ -8,6 +8,9 @@ import java.util.Scanner;
  * @author kamilalol
  * Task1: Заполните двумерный массив случайным числами и выведите максимальное, минимальное и среднее значение.
  * -Random можно, но не желательно. -> ГПСЧ
+ *
+ * + Не надо на гитхаб пушить лишние файлы (папка .idea и target), только то что нужно для запуска проекта (в этом тебе поможет gitignore).
+ * + Подумай над оптимизацией кода, много лишнего
  */
 public class Main {
     public static void main(String[] args) {
@@ -17,19 +20,10 @@ public class Main {
         Scanner console = new Scanner(System.in);
         String line = "Y";
 
-        int seed = 0;
-        int a = 41;
-        int c = 661;
-        int m = 617;
-
         int[][] array = new int[10][10];
 
-        int max;
-        int min;
-        double mid = 0.0;
-
-        int sum;
-        int count;
+        int max, min, seed, sum;
+        double mid;
 
 
         while (line.equals("Yes")||line.equals("yes")||line.equals("Y")||line.equals("y")) {
@@ -38,18 +32,15 @@ public class Main {
 
                 max = -2147483648;
                 min = 2147483647;
-                mid = 0;
 
                 sum = 0;
-                count = 0;
 
-                line = console.nextLine();
-                seed = Integer.parseInt(line);
+                seed = Integer.parseInt(console.nextLine());
 
-                for (int i = 0; i < array.length; ++i) {
-                    for (int j = 0; j < array[0].length; ++j) {
+                for (int i = 0;i < array.length; ++i) {
+                    for (int j = 0;j < array[0].length; ++j) {
 
-                        seed = (a * seed + c) % m;
+                        seed = (41 * seed + 661) % 617;
                         array[i][j] = seed;
                         System.out.print(array[i][j] + " ");
 
@@ -60,11 +51,10 @@ public class Main {
                             min = array[i][j];
                         }
                         sum += array[i][j];
-                        count++;
                     }
                     System.out.print("\n");
                 }
-                mid = (double) sum / (double) count;
+                mid = (double) sum / (double) (array.length*array[0].length);
 
                 System.out.println("Максимальное: " + max + ". Минимальное: " + min + ". Среднее: " + mid + ".");
             }catch (NumberFormatException e) {

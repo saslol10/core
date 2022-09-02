@@ -10,7 +10,10 @@ import java.util.Scanner;
  * - Array.sort() использовать нельзя.
  * Задача(*) №1: написать простые тесты. -> assert(?) Не могу придумать куда их вписать.
  * Задача(*) №2: учесть дубликаты в массиве 2 задачи. (Надо сделать так, чтобы алгоритм работал правильно с дублями). Example: input: 8 2 3 4 2 3 1 9 output: 1 2 2 3 3 4 8 9
- */
+
+ * + Не надо на гитхаб пушить лишние файлы (папка .idea и target), только то что нужно для запуска проекта (в этом тебе поможет gitignore).
+ * + Подумай над оптимизацией кода, много лишнего
+ * */
 
 
 public class Main {
@@ -18,8 +21,8 @@ public class Main {
     public static void value_output(int [] source, int a)
     {
         quickSort(source, 0, a - 1);
-        for (int i = 0; i < source.length; i++) {
-            System.out.print(source[i] + " ");
+        for (int j : source) {
+            System.out.print(j + " ");
         }
     }
     public static void quickSort(int[] source, int leftBorder, int rightBorder) {
@@ -65,27 +68,24 @@ public class Main {
             try {
                 if (line.equals("1")) {
                     array = new int[]{5, 6, 3, 2, 5, 1, 4, 9};
-                    a = 7;
-                    value_output(array, a);
+                    value_output(array, array.length);
                 } else if (line.equals("2")) {
                     System.out.println("Введите размер массива:");
-                    line = console.nextLine();
-                    a = Integer.parseInt(line);
-                    while(a<=0)
+                    a = Integer.parseInt(console.nextLine());
+
+                    while (a<=0)
                     {
-                        System.out.println("Число элементов в массиве должно быть положительным. Попробуйте еще раз:");
-                        line = console.nextLine();
-                        a = Integer.parseInt(line);
+                        System.out.println("Число эелементов в массиве должно быть больше 0.");
+                        a = Integer.parseInt(console.nextLine());
                     }
                     array = new int[a];
                     System.out.println("Введите элементы массива:");
 
                     for (int i = 0; i < array.length; i++) {
                         System.out.print("["+ (i+1) + "]:");
-                        line = console.nextLine();
-                        array[i] = Integer.parseInt(line);
+                        array[i] = Integer.parseInt(console.nextLine());
                     }
-                    value_output(array, a);
+                    value_output(array, array.length);
                 } else {
                     System.out.println("Что-то пошло не так.");
                 }
